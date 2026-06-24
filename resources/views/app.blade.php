@@ -21,8 +21,12 @@
           <a class="nav-link active" aria-current="" href="#">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ route('parametre.All') }}">Liste Paramètres</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="">Liste Fabricants</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
