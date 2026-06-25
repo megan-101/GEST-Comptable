@@ -3,6 +3,7 @@
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\BatimentsController;
 use App\Http\Controllers\LieuController;
+use App\Http\Controllers\ParametreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UtilisateurController;
 
@@ -43,3 +44,15 @@ Route::post('/utilisateur', [UtilisateurController::class, 'store'])->name('util
 Route::get('/utilisateur/{utilisateur}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
 Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
 Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
+Route::get('parametre/all', [ParametreController::class, 'all'])->name('parametre.All');
+Route::get('parametre/formAjout', [ParametreController::class, 'formAjout'])->name('parametre.formAjout');
+Route::post('parametre/Create', [ParametreController::class, 'create'])->name('parametre.create');
+Route::get('parametre/read/{id}', [ParametreController::class, 'read'])->name('parametre.read');
+Route::get('parametre/formModifier/{id}', [ParametreController::class, 'formModifier'])->name('parametre.formModifier');
+Route::post('parametre/update/{id}', [ParametreController::class, 'update'])->name('parametre.update');
+Route::get('parametre/delete/{id}', [ParametreController::class, 'delete'])->name('parametre.delete');
+Route::get('parametre/destroy/{id}', [ParametreController::class, 'destroy'])->name('parametre.destroy');
+
+
+
+
