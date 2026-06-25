@@ -5,7 +5,6 @@ use App\Http\Controllers\BatimentsController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UtilisateurController;
 
 Route::get('/', function () {
     return view('app');
