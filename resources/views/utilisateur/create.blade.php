@@ -1,0 +1,47 @@
+@extends('app')
+
+@section('content')
+    <div class="container mt-5">
+        <div class="card border border-primary shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h4 mb-0">Ajouter un utilisateur</h1>
+            </div>
+            <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ol class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ol>
+                    </div>
+                @endif
+                <form action="{{ route('utilisateur.store') }}" method="POST">
+                    @csrf
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="matricule" class="form-label">Matricule</label>
+                            <input type="text" name="matricule" class="form-control" id="matricule" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="login" class="form-label">Login</label>
+                            <input type="text" name="login" class="form-control" id="login" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nom" class="form-label">Nom</label>
+                        <input type="text" name="nom" class="form-control" id="nom" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mdp" class="form-label">Mot de passe</label>
+                        <input type="password" name="mdp" class="form-control" id="mdp" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary px-4">Ajouter</button>
+                        <a href="{{ route('utilisateur.index') }}" class="btn btn-outline-danger">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

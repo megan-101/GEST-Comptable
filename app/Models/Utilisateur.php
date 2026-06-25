@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fabricant extends Model
+class Utilisateur extends Model
 {
-    /** @use HasFactory<\Database\Factories\FabricantFactory> */
+    /** @use HasFactory<\Database\Factories\UtilisateurFactory> */
     use HasFactory;
 
-               
-     //les champs à remplir
-        protected $fillable = ['nom','prenom','email','telephone'];
-
-            
-       public  function utilisateur(){
-        $listeUtilisateurs = $fillable;
-        return $this->hasMany(Utilisateur::class);
-       }
-
+    protected $fillable = [
+        "id",
+        "matricule",
+        "login",
+        "nom",
+        "mdp"
+    ];
+        
 }
