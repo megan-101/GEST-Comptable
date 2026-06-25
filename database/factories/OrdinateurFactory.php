@@ -9,20 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OrdinateurFactory extends Factory
 {
-    private $listeProcesseur=[
-        'intel core x86 i3',
-        'intel core x86 i5',
-        'intel core x86 i7',
-        'intel core x86 i9',
-        'intel AND Ryzen 3',
-        'intel AND Ryzen 3',
-        'intel AND Ryzen 5',
-        'intel AND Ryzen 7',
-        'intel AND Ryzen 9'
-    ];
-    private $listeRam=[
-         1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024
-    ];
+    
 
     /**
      * Define the models default state.
@@ -32,11 +19,9 @@ class OrdinateurFactory extends Factory
     public function definition(): array
     {
         return [
-            'imei'=> fake()->randomNumber(8),
-            'ram'=> fake()->randomElement($this->listeRam),  
-            'stockage'=> fake()->numberBetween(128, 1064),
-            'processeur'=> fake()->randomElement($this->listeProcesseur),
-            'date_creation'=> new \DateTime(),
+            'id'=> fake()->randomNumber(8),
+            'capacite'=> fake()->numberBetween(128, 1064),
+            'libelle'=> fake()->randomElement(),
         ];
     
     }

@@ -24,3 +24,9 @@ Route::get('batiment/read/{id}', [Batimentscontroller::class, 'read'])->name('ba
 Route::post('batiment/delete', [Batimentscontroller::class, 'delete'])->name('batiment.delete');
 
 
+Route::get('Ordinateur/all', [Ordinateurcontroller::class, 'all'])->name('ordinateur.All');
+Route::get('Ordinateur/formAjout', [Ordinateurcontroller::class, 'formAjout'])->name('ordinateur.formAjout');
+Route::post('Ordinateur/Create', [Ordinateurcontroller::class, 'create'])->name('ordinateur.create');
+Route::post('Ordinateur/update', [Ordinateurcontroller::class, 'update'])->name('ordinateur.update');
+Route::get('Ordinateur/read/{id}', [Ordinateurcontroller::class, 'read'])->name('ordinateur.read');
+Route::post('Ordinateur/delete', [Ordinateurcontroller::class, 'delete'])->name('ordinateur.delete');

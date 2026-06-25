@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('ordinateurs', function (Blueprint $table) {
             $table->id();
-            $table->String('imei');
-            $table->float('ram');
-            $table->float('stockage');
-            $table->String('processeur');
-            $table->timestamp('date_creation');
-            $table->timestamps();
+            $table->float('capacite');
+            $table->String('libelle');
+            
 
         });
 

@@ -11,7 +11,7 @@ class Ordinateur extends Model
     use HasFactory;
 
         //les champs à remplir
-        protected $fillable = ['id', 'imei', 'ram', 'stockage', 'processeur','date_creation'];
+        protected $fillable = ['id', 'capacite', 'libelle'];
 
          public  function fabricant(){
         return $this->hasOne(ordinateur::class);

@@ -23,7 +23,7 @@ class UtilisateurController extends Controller
         public function create(Request $create){
            $create->validate(
            [
-                'code' =>'required',
+                'id' =>'required',
                 'libelle' =>'required',
             ] 
         );
