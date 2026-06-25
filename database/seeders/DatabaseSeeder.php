@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lieu;
 use App\Models\Utilisateur;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +10,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Utilisateur::factory(5)->create();
+        Lieu::factory(10)->create();
     }
 }

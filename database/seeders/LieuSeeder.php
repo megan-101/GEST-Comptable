@@ -12,6 +12,5 @@ class LieuSeeder extends Seeder
      */
     public function run(): void
     {
-        Lieu::factory(10)->create();
     }
 }
