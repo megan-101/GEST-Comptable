@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ordinateur extends Model
+class PostComptable extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrdinateurFactory> */
+    /** @use HasFactory<\Database\Factories\PostComptableFactory> */
     use HasFactory;
 
         //les champs à remplir
         protected $fillable = ['id', 'capacite', 'libelle'];
 
          public  function fabricant(){
-        return $this->hasOne(ordinateur::class);
+        return $this->hasOne(PostComptable::class);
        }
 
 }

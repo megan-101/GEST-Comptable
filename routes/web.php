@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\BatimentsController;
+use App\Http\Controllers\PostComptableController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,9 +25,9 @@ Route::get('batiment/read/{id}', [Batimentscontroller::class, 'read'])->name('ba
 Route::post('batiment/delete', [Batimentscontroller::class, 'delete'])->name('batiment.delete');
 
 
-Route::get('Ordinateur/all', [Ordinateurcontroller::class, 'all'])->name('ordinateur.All');
-Route::get('Ordinateur/formAjout', [Ordinateurcontroller::class, 'formAjout'])->name('ordinateur.formAjout');
-Route::post('Ordinateur/Create', [Ordinateurcontroller::class, 'create'])->name('ordinateur.create');
-Route::post('Ordinateur/update', [Ordinateurcontroller::class, 'update'])->name('ordinateur.update');
-Route::get('Ordinateur/read/{id}', [Ordinateurcontroller::class, 'read'])->name('ordinateur.read');
-Route::post('Ordinateur/delete', [Ordinateurcontroller::class, 'delete'])->name('ordinateur.delete');
+Route::get('PostComptable/all', [PostComptablecontroller::class, 'all'])->name('PostComptable.All');
+Route::get('PostComptable/formAjout', [PostComptablecontroller::class, 'formAjout'])->name('PostComptable.formAjout');
+Route::post('PostComptable/Create', [PostComptablecontroller::class, 'create'])->name('PostComptable.create');
+Route::post('PostComptable/update', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
+Route::get('PostComptable/read/{id}', [PostComptablecontroller::class, 'read'])->name('PostComptable.read');
+Route::post('PostComptable/delete', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');

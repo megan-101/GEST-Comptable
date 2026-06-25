@@ -24,6 +24,9 @@
           <a class="nav-link" href="">Liste Fabricants</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="">Liste PostComptable</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
         <li class="nav-item">

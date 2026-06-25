@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fabricant;
+use App\Models\PostComptable;
 use Illuminate\Http\Request;
 
-class OrdinateurService {
+class PostComptableService {
 
-    public function create (Request $create):Ordinateur{
+    public function create (Request $create):PostComptable{
          $create->validate(
            [
-                'id' =>'required|id|unique:ordinateurs',
+                'id' =>'required|id|unique:PostComptables',
                 'capacite' =>'required',
                 'libelle' =>'required',
 
 
             ] 
         );
-       return Ordinateur::create($create->all());
+       return PostComptable::create($create->all());
        
     }
 }
