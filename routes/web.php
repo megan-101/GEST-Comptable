@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\BatimentsController;
+use App\Http\Controllers\LieuController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,5 +23,16 @@ Route::post('batiment/Create', [Batimentscontroller::class, 'create'])->name('ba
 Route::post('batiment/update', [Batimentscontroller::class, 'update'])->name('batiment.update');
 Route::get('batiment/read/{id}', [Batimentscontroller::class, 'read'])->name('batiment.read');
 Route::post('batiment/delete', [Batimentscontroller::class, 'delete'])->name('batiment.delete');
+
+
+// ---- Routes Lieu ----
+Route::get('lieu/all', [LieuController::class, 'all'])->name('lieu.All');
+Route::get('lieu/formAjout', [LieuController::class, 'formAjout'])->name('lieu.formAjout');
+Route::post('lieu/create', [LieuController::class, 'create'])->name('lieu.create');
+Route::get('lieu/read/{id}', [LieuController::class, 'read'])->name('lieu.read');
+Route::get('lieu/modifier/{id}', [LieuController::class, 'formUpdate'])->name('lieu.formUpdate');
+Route::put('lieu/update/{id}', [LieuController::class, 'update'])->name('lieu.update');
+Route::get('lieu/supprimer/{id}', [LieuController::class, 'confirmDelete'])->name('lieu.confirmDelete');
+Route::post('lieu/delete', [LieuController::class, 'delete'])->name('lieu.delete');
 
 
