@@ -2,79 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\PostComptable;
 use App\Interfaces\PostComptableInterface;
-
+use Illuminate\Http\Request;
 
 class PostComptableController extends Controller
 {
-    protected PostComptableInterface $PostComptableService;
+    protected $postComptableService;
 
-    public function __construct(PostComptableInterface $PostComptableService) {
-        $this->PostComptableService = $PostComptableService;
-    }
-
-    //
-     public function all(){
-            $listePostComptables = PostComptable::all();
-            return view('PostComptables.liste_PostComptable', compact('listePostComptables'));
-
-        } 
-
-        public function formAjout(){
-            return view('PostComptables.form_ajout_PostComptable');
-
-        } 
-        
-        public function create(Request $create){
-           $create->validate(
-           [
-                'capacite' =>'required',
-                'libelle' =>'required',
-            ]
-        );
-
-        PostComptable::create($create->all());
-        return redirect()->route('PostComptable.All')->with('success', 'PostComptable ajouté avec succès.');
-
-
-        }
-        public function read( $id){
-          $PostComptable =  PostComptable::find($id);
-        return view('PostComptables.consulter_PostComptable', compact('PostComptable'));
-        }
-
-         public function formUpdate($id)
+    public function __construct(PostComptableInterface $postComptableService)
     {
-        $PostComptable = PostComptable::findOrFail($id);
-        return view('PostComptables.modifier_PostComptable', compact('PostComptable'));
+        $this->postComptableService = $postComptableService;
     }
-        public function update(Request $create, $id){
-        $create->validate([
-                'capacite' =>'required',
-                'libelle' =>'required',
-            ]);
 
-          $PostComptable =  PostComptable::findOrFail($id);
-          $PostComptable->update($create->all());
-        return redirect()->route('PostComptable.All')->with('success', 'PostComptable ajouté avec succès.');
-        }
+    public function all()
+    {
+        $listePostComptables = $this->postComptableService->all();
 
-        public function ConfirmDelete($id){
-          $PostComptable =  PostComptable::find($id);
+        return view('postcomptables.liste_postcomptables', compact('listePostComptables'));
+    }
 
+    public function formAjout()
+    {
+        return view('postcomptables.form_ajout_postcomptables');
+    }
 
-        return view('PostComptables.supprimer_PostComptable', compact('PostComptable'));
+    public function create(Request $request)
+    {
+        $this->postComptableService->create($request);
 
-        }
+        return redirect()->route('postcomptable.All');
+    }
 
-        public function delete($id){
+    public function read($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
 
-          $PostComptable =  PostComptable::findOrFail($id);
-          $PostComptable->delete();
+        return view('postcomptables.consulter_postcomptables', compact('postComptable'));
+    }
 
-        return redirect()->route('PostComptable.All')->with('success', 'PostComptable supprimer avec succès.');
+    public function formModifier($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
 
-        }
+        return view('postcomptables.modifier_postcomptables', compact('postComptable'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->postComptableService->update($request, $id);
+
+        return redirect()->route('postcomptable.All');
+    }
+
+    public function delete($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
+
+        return view('postcomptables.supprimer_postcomptables', compact('postComptable'));
+    }
+
+    public function destroy($id)
+    {
+        $this->postComptableService->delete($id);
+
+        return redirect()->route('postcomptable.All');
+    }
 }

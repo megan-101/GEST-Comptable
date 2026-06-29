@@ -9,6 +9,11 @@ use App\implementations\LieuImp;
 
 class Lieu extends ServiceProvider
 {
+    protected $listen = [
+        LieuEvent::class => [
+            CreateLieu::class,
+        ],
+    ];
     /**
      * Register services.
      */
