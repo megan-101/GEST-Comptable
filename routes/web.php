@@ -64,5 +64,5 @@ Route::get('PostComptable/modifier/{id}', [PostComptableController::class, 'form
 Route::post('PostComptable/update/{id}', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
 Route::get('PostComptable/supprimer/{id}', [PostComptableController::class, 'confirmDelete'])->name('PostComptable.confirmDelete');
 Route::get('PostComptable/read/{id}', [PostComptablecontroller::class, 'read'])->name('PostComptable.read');
-Route::post('PostComptable/delete', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
+Route::post('PostComptable/delete/{id}', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
 

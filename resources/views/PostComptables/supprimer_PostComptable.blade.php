@@ -20,7 +20,7 @@
             <tr><th>Libellé</th><td>{{ $PostComptable->libelle }}</td></tr>
         </table>
 
-        <form method="POST" action="{{ route('PostComptable.delete') }}">
+        <form method="POST" action="{{ route('PostComptable.delete', $PostComptable->id) }}">
             @csrf
             <input type="hidden" name="id" value="{{ $PostComptable->id }}">
             <button type="submit" class="btn btn-warning">Confirmer la suppression</button>

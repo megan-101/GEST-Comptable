@@ -36,7 +36,7 @@ class PostComptableController extends Controller
         );
 
         PostComptable::create($create->all());
-        return redirect()->route('PostComptables.All')->with('success', 'PostComptable ajouté avec succès.');
+        return redirect()->route('PostComptable.All')->with('success', 'PostComptable ajouté avec succès.');
 
 
         }
@@ -58,7 +58,7 @@ class PostComptableController extends Controller
 
           $PostComptable =  PostComptable::findOrFail($id);
           $PostComptable->update($create->all());
-        return redirect()->route('PostComptables.All')->with('success', 'PostComptable ajouté avec succès.');
+        return redirect()->route('PostComptable.All')->with('success', 'PostComptable ajouté avec succès.');
         }
 
         public function ConfirmDelete($id){
@@ -72,9 +72,9 @@ class PostComptableController extends Controller
         public function delete($id){
 
           $PostComptable =  PostComptable::findOrFail($id);
-          $PostComptable ->delete();
+          $PostComptable->delete();
 
-        return redirect()->route('PostComptables.All')->with('success', 'PostComptable supprimer avec succès.');
+        return redirect()->route('PostComptable.All')->with('success', 'PostComptable supprimer avec succès.');
 
         }
 }
