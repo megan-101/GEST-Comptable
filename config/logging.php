@@ -64,6 +64,16 @@ return [
             'level' => 'debug'
         ],
 
+
+        'ajout_parametre'=> [
+            'driver' => 'single', 
+            'path' => storage_path('logs/ajout_paramtre.log'),
+            'level' => 'debug'
+        ],
+
+
+
+
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),
