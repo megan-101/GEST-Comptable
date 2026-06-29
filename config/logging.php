@@ -52,6 +52,12 @@ return [
 
     'channels' => [
 
+    'ajout_PostComptable' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/ajout_PostComptable.log'),
+        'level' => 'debug'
+    ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),

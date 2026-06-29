@@ -5,6 +5,8 @@ namespace App\Implementations;
 Use Illuminate\View\View;
 Use Illuminate\Http\Request;
 use App\Models\PostComptable;
+use App\Events\PostComptableEvent;
+
 use App\Interfaces\PostComptableInterface;
 
 
@@ -20,11 +22,19 @@ class PostComptableImplementation Implements PostComptableInterface
                 'id' =>'required|id|unique:PostComptables',
                 'capacite' =>'required',
                 'libelle' =>'required',
-
-
             ] 
         );
-       return PostComptable::create($create->all());
+        //recupere le postcomptable inserer dans la base
+       $createdPostComptable = PostComptable::create($create->all());
+
+       //creation du nouvel evenement
+
+      $newPostComptableEvent = new PostComptableEvent($createdPostComptable);
+
+      // on emmet l'evenement 
+      event($newPostComptableEvent);
+      
+      return  $newPostComptableEvent;
        
     }
 
