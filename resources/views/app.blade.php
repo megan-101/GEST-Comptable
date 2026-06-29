@@ -29,13 +29,13 @@
             <a class="nav-link" href="#"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true"></a>
+            <a class="nav-link" href="{{ route('utilisateur.index') }}">Liste Utilisateurs</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('parametre.All') }}">Liste Paramètres</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="">Liste PostComptable</a>
+          <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste PostComptable</a>
         </li>
         </ul>
       </div>

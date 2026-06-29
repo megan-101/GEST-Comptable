@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parametre;
-use App\Services\ParametreService;
+use App\Interfaces\ParametreInterface;
 use Illuminate\Http\Request;
 
 class ParametreController extends Controller
 {
     protected $parametreService;
 
-    public function __construct(ParametreService $parametreService)
+    public function __construct(ParametreInterface $parametreService)
     {
         $this->parametreService = $parametreService;
     }
@@ -20,7 +20,7 @@ class ParametreController extends Controller
      */
     public function all()
     {
-        $listeParametres = Parametre::all();
+        $listeParametres = $this->parametreService->all();
         return view('parametres.liste_parametres', compact('listeParametres'));
     }
 
@@ -46,7 +46,7 @@ class ParametreController extends Controller
      */
     public function read($id)
     {
-        $parametre = Parametre::findOrFail($id);
+        $parametre = $this->parametreService->find($id);
         return view('parametres.consulter_parametres', compact('parametre'));
     }
 
@@ -55,7 +55,7 @@ class ParametreController extends Controller
      */
     public function formModifier($id)
     {
-        $parametre = Parametre::findOrFail($id);
+        $parametre = $this->parametreService->find($id);
         return view('parametres.modifier_parametres', compact('parametre'));
     }
 
@@ -73,7 +73,7 @@ class ParametreController extends Controller
      */
     public function delete($id)
     {
-        $parametre = Parametre::findOrFail($id);
+        $parametre = $this->parametreService->find($id);
         return view('parametres.supprimer_parametres', compact('parametre'));
     }
 
@@ -82,9 +82,7 @@ class ParametreController extends Controller
      */
     public function destroy($id)
     {
-        $parametre = Parametre::findOrFail($id);
-        $parametre->delete();
+        $this->parametreService->delete($id);
         return redirect()->route('parametre.All');
     }
 }
-
