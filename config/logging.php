@@ -57,6 +57,12 @@ return [
             'path' => storage_path('logs/ajout_manufacturer.log'),
             'level'  => 'debug'
         ],
+        
+        'ajout_PostComptable' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/ajout_PostComptable.log'),
+            'level' => 'debug'
+        ],
 
         'stack' => [
             'driver' => 'stack',

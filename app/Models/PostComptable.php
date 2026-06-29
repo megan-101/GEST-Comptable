@@ -10,10 +10,12 @@ class PostComptable extends Model
     /** @use HasFactory<\Database\Factories\PostComptableFactory> */
     use HasFactory;
 
-        //les champs à remplir
-        protected $fillable = ['id', 'capacite', 'libelle'];
+    //les champs à remplir
+    protected $fillable = ['id', 'capacite', 'libelle'];
 
-         public  function fabricant(){
+    protected $table = 'post_comptables';
+
+    public  function fabricant(){
         return $this->hasOne(PostComptable::class);
        }
 
