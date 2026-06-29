@@ -2,6 +2,7 @@
 
 namespace App\Implementations;
 
+use App\Events\UtilisateurEvent;
 use App\Interfaces\UtilisateurInterface;
 use App\Models\Utilisateur;
 use Illuminate\Contracts\View\View;
@@ -28,7 +29,12 @@ class UtilisateurImpl implements UtilisateurInterface{
             "mdp" => "required|max:255"
         ]);
 
-        return Utilisateur::create($request->all());
+
+        $created_Utilisateur = Utilisateur::create($request->all());
+        event(new UtilisateurEvent($created_Utilisateur));
+
+        return  $created_Utilisateur;
+        
     }
 
     public function edit(Utilisateur $utilisateur): View{
