@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Utilisateur;
-use App\Services\UtilisateurService;
+use App\Interfaces\UtilisateurInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -11,17 +11,17 @@ use Illuminate\Http\RedirectResponse;
 
 class UtilisateurController extends Controller
 {
-    protected UtilisateurService $utilisateurService;
+    protected UtilisateurInterface $utilisateurInterface;
 
-    public function __construct(UtilisateurService $utilisateurService) {
-        $this->utilisateurService = $utilisateurService;
+    public function __construct(UtilisateurInterface $utilisateurInterface) {
+        $this->utilisateurInterface = $utilisateurInterface;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return $this->utilisateurService->index();
+        return $this->utilisateurInterface->index();
     }
 
     /**
@@ -29,7 +29,7 @@ class UtilisateurController extends Controller
      */
     public function create()
     {
-        return $this->utilisateurService->create();
+        return $this->utilisateurInterface->create();
     }
 
     /**
@@ -37,7 +37,7 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $utilisateur = $this->utilisateurService->store($request);
+        $utilisateur = $this->utilisateurInterface->store($request);
         try {
             if ($utilisateur === null) {
                 return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la création de l\'utilisateur');
@@ -62,7 +62,7 @@ class UtilisateurController extends Controller
      */
     public function edit(Utilisateur $utilisateur)
     {
-        return $this->utilisateurService->edit($utilisateur);
+        return $this->utilisateurInterface->edit($utilisateur);
     }
 
     /**
@@ -70,7 +70,13 @@ class UtilisateurController extends Controller
      */
     public function update(Request $request, Utilisateur $utilisateur)
     {
-        return $this->utilisateurService->update($request, $utilisateur);
+        $result = $this->utilisateurInterface->update($request, $utilisateur);
+
+        if($result){
+            return redirect()->route('utilisateur.index')->with('success', 'Utilisateur modifié avec succès');
+        }else{
+            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la modification de l\'utilisateur');
+        }
     }
 
     /**
@@ -78,6 +84,6 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
-        return $this->utilisateurService->destroy($utilisateur);
+        return $this->utilisateurInterface->destroy($utilisateur);
     }
 }
