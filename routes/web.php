@@ -44,6 +44,7 @@ Route::post('/utilisateur', [UtilisateurController::class, 'store'])->name('util
 Route::get('/utilisateur/{utilisateur}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
 Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
 Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
+
 Route::get('parametre/all', [ParametreController::class, 'all'])->name('parametre.All');
 Route::get('parametre/formAjout', [ParametreController::class, 'formAjout'])->name('parametre.formAjout');
 Route::post('parametre/Create', [ParametreController::class, 'create'])->name('parametre.create');
@@ -59,6 +60,9 @@ Route::get('parametre/destroy/{id}', [ParametreController::class, 'destroy'])->n
 Route::get('PostComptable/all', [PostComptablecontroller::class, 'all'])->name('PostComptable.All');
 Route::get('PostComptable/formAjout', [PostComptablecontroller::class, 'formAjout'])->name('PostComptable.formAjout');
 Route::post('PostComptable/Create', [PostComptablecontroller::class, 'create'])->name('PostComptable.create');
-Route::post('PostComptable/update', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
+Route::get('PostComptable/modifier/{id}', [PostComptableController::class, 'formUpdate'])->name('PostComptable.formUpdate');
+Route::post('PostComptable/update/{id}', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
+Route::get('PostComptable/supprimer/{id}', [PostComptableController::class, 'confirmDelete'])->name('PostComptable.confirmDelete');
 Route::get('PostComptable/read/{id}', [PostComptablecontroller::class, 'read'])->name('PostComptable.read');
-Route::post('PostComptable/delete', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
+Route::post('PostComptable/delete/{id}', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
+

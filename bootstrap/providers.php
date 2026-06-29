@@ -5,4 +5,5 @@ return [
     App\Providers\UtilisateurProvider::class,
     App\Providers\ParametreProvider::class,
     App\Providers\Lieu::class,
+    App\Providers\PostComptablePrivider::class,
 ];
