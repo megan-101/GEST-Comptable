@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="Capacite">Capacite</label>
-                <input type="text" class="form-control" name="Capacite" id="Capacite" value="{{ old('Capacite', $PostComptable->Capacite) }}" required>
+                <input type="text" class="form-control" name="Capacite" id="Capacite" value="{{ old('capacite', $PostComptable->capacite) }}" required>
             </div>
 
             <div class="form-group">
