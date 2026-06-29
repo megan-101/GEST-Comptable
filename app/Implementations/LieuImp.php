@@ -30,7 +30,9 @@ class LieuImp implements LieuInterface
             'adresse' => 'required',
         ]);
 
-        Lieu::create($request->only(['code', 'libelle', 'adresse']));
+        $createdLieu = Lieu::create($request->only(['code', 'libelle', 'adresse']));
+
+        event(new \App\Events\LieuEvent($createdLieu));
 
         return redirect()->route('lieu.All')->with('success', 'Lieu ajouté avec succès.');
     }
@@ -57,6 +59,7 @@ class LieuImp implements LieuInterface
             'libelle' => 'required',
             'adresse' => 'required',
         ]);
+
 
         $lieu = Lieu::findOrFail($id);
         $lieu->update($request->only(['code', 'libelle', 'adresse']));
