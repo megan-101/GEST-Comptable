@@ -65,12 +65,12 @@ Route::get('parametre/destroy/{id}', [ParametreController::class, 'destroy'])->n
 
 
 
-Route::get('PostComptable/all', [PostComptablecontroller::class, 'all'])->name('PostComptable.All');
-Route::get('PostComptable/formAjout', [PostComptablecontroller::class, 'formAjout'])->name('PostComptable.formAjout');
-Route::post('PostComptable/Create', [PostComptablecontroller::class, 'create'])->name('PostComptable.create');
-Route::get('PostComptable/modifier/{id}', [PostComptableController::class, 'formUpdate'])->name('PostComptable.formUpdate');
-Route::post('PostComptable/update/{id}', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
-Route::get('PostComptable/supprimer/{id}', [PostComptableController::class, 'confirmDelete'])->name('PostComptable.confirmDelete');
-Route::get('PostComptable/read/{id}', [PostComptablecontroller::class, 'read'])->name('PostComptable.read');
-Route::post('PostComptable/delete/{id}', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
+Route::get('postcomptable/all', [PostComptableController::class, 'all'])->name('postcomptable.All');
+Route::get('postcomptable/formAjout', [PostComptableController::class, 'formAjout'])->name('postcomptable.formAjout');
+Route::post('postcomptable/Create', [PostComptableController::class, 'create'])->name('postcomptable.create');
+Route::get('postcomptable/read/{id}', [PostComptableController::class, 'read'])->name('postcomptable.read');
+Route::get('postcomptable/formModifier/{id}', [PostComptableController::class, 'formModifier'])->name('postcomptable.formModifier');
+Route::post('postcomptable/update/{id}', [PostComptableController::class, 'update'])->name('postcomptable.update');
+Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
+Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
 
