@@ -6,6 +6,7 @@ use App\Interfaces\ParametreInterface;
 use App\Models\Parametre;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Events\ParametreEvent;
 
 
 class ParametreImpl implements ParametreInterface
@@ -22,7 +23,17 @@ class ParametreImpl implements ParametreInterface
             'libelle' => 'required',
         ]);
 
-        return Parametre::create($request->all());
+         //recupere le parametre inserer dans la base
+        $createdParametre = Parametre::create($request->all());
+
+        //cree un nouvel evenement
+        $newParametreEvent = new ParametreEvent($createdParametre);
+
+        //emission dispatch
+        event($newParametreEvent);
+
+        return $createdParametre;
+
     }
 
     public function update(Request $request, $id)
@@ -46,5 +57,8 @@ class ParametreImpl implements ParametreInterface
     {
         $parametre = $this->find($id);
         return $parametre->delete();
+
+       
     }
+
 }
