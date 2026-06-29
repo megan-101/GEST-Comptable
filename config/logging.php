@@ -52,6 +52,12 @@ return [
 
     'channels' => [
 
+        'ajout_manufacturer' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/ajout_manufacturer.log'),
+            'level'  => 'debug'
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),
