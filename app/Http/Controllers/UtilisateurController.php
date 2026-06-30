@@ -21,7 +21,11 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        return $this->utilisateurInterface->index();
+        try {
+            return $this->utilisateurInterface->index();
+        } catch (Exception $e) {
+            abort(500, 'Erreur lors de la récupération des utilisateurs: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -29,7 +33,11 @@ class UtilisateurController extends Controller
      */
     public function create()
     {
-        return $this->utilisateurInterface->create();
+        try {
+            return $this->utilisateurInterface->create();
+        } catch (Exception $e) {
+            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de l\'affichage du formulaire: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -62,7 +70,11 @@ class UtilisateurController extends Controller
      */
     public function edit(Utilisateur $utilisateur)
     {
-        return $this->utilisateurInterface->edit($utilisateur);
+        try {
+            return $this->utilisateurInterface->edit($utilisateur);
+        } catch (Exception $e) {
+            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de l\'affichage du formulaire: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -72,10 +84,14 @@ class UtilisateurController extends Controller
     {
         $result = $this->utilisateurInterface->update($request, $utilisateur);
 
-        if($result){
-            return redirect()->route('utilisateur.index')->with('success', 'Utilisateur modifié avec succès');
-        }else{
-            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la modification de l\'utilisateur');
+        try {
+            if($result === false){
+                return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la modification de l\'utilisateur');
+            }else{
+                return redirect()->route('utilisateur.index')->with('success', 'Utilisateur modifié avec succès');
+            }
+        } catch (Exception $e) {
+            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la modification de l\'utilisateur: ' . $e->getMessage());
         }
     }
 
@@ -84,6 +100,16 @@ class UtilisateurController extends Controller
      */
     public function destroy(Utilisateur $utilisateur)
     {
-        return $this->utilisateurInterface->destroy($utilisateur);
+        $result = $this->utilisateurInterface->destroy($utilisateur);
+
+        try {
+            if($result === false){
+                return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la suppression de l\'utilisateur');
+            }else{
+                return redirect()->route('utilisateur.index')->with('success', 'Utilisateur supprimé avec succès');
+            }
+        } catch (Exception $e) {
+            return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la suppression de l\'utilisateur: ' . $e->getMessage());
+        }
     }
 }

@@ -11,7 +11,7 @@ interface ManufacturerInterface{
 
     // les interfaces ne contiennent que les def des fonctions donc le nom son type et ses arguments et n'a acune logique d'implementation
 
-    public function index(): View;
+    public function getAll();
 
     public function create(): View;
 
