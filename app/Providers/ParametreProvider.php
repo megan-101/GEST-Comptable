@@ -8,10 +8,15 @@ use App\Interfaces\ParametreInterface;
 use App\Events\ParametreEvent;
 use App\Listeners\CreateParametre;
 
+use App\Events\ParametreActivityEvent;
+use App\Listeners\LogParametreActivity;
+use Illuminate\Support\Facades\Event;
+
 class ParametreProvider extends ServiceProvider
 {   
-    protected $listen= [
-        ParametreEvent::class => [CreateParametre::class]
+    protected $listen = [
+        ParametreEvent::class => [CreateParametre::class],
+        ParametreActivityEvent::class => [LogParametreActivity::class],
     ];
     /**
      * Register services.
