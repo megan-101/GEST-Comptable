@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->string('action');
+            $table->string('modele');
+            $table->string('statut');
             $table->text('message')->nullable();
+            $table->dateTime('date');
             $table->string('ip_address')->nullable();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\LogInterface;
 use Illuminate\Http\Request;
 use App\Interfaces\ManufacturerInterface;
 use Illuminate\Http\RedirectResponse;
@@ -11,16 +12,51 @@ use App\Models\Manufacturer;
 class ManufacturerController extends Controller
 {
     protected ManufacturerInterface $manufacturerInterface;
+    protected LogInterface $logInterface;
 
-    public function __construct(ManufacturerInterface $manufacturerInterface) {
+    public function __construct(ManufacturerInterface $manufacturerInterface,
+                                LogInterface $logInterface) {
         $this->manufacturerInterface = $manufacturerInterface;
+        $this->logInterface = $logInterface;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return $this->manufacturerInterface->index();
+        try{
+            $manufacturers = $this->manufacturerInterface->getAll();
+
+            if($manufacturers === null){
+                $this->logInterface->save([
+                    'modele' => 'MANUFACTURER',
+                    'action' => 'Tentative de Lister Tous les Manufecturers',
+                    'statut' => 'ECHEC',
+                    'message' => 'Une Erreur est survenue',
+                    'ip_address' => request()->ip(),
+                ]);
+            }
+            else{
+                $this->logInterface->save([
+                    'modele' => 'MANUFACTURER',
+                    'action' => 'Lister Tous les Manufecturers',
+                    'statut' => 'SUCCES',
+                    'message' => 'Tous les manufacturers ont ete affcihé avec succes',
+                    'ip_address' => request()->ip(),
+                ]);
+
+                return view('manufacturer.index', compact('manufacturers') );
+            }
+        }catch(Exception $e){
+            $this->logInterface->save([
+                'modele' => 'MANUFACTURER',
+                'action' => 'Tentative de Lister Tous les Manufecturers',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
+            ]);
+        }
+        
     }
 
     /**
@@ -28,7 +64,29 @@ class ManufacturerController extends Controller
      */
     public function create()
     {
-        return $this->manufacturerInterface->create();
+        
+        try{
+
+            $this->logInterface->save([
+                    'modele' => 'MANUFACTURER',
+                    'action' => 'Redirection vers le formulaire d\'ajout',
+                    'statut' => 'SUCCES',
+                    'message' => 'Affichage du formulaire avec ducces',
+                    'ip_address' => request()->ip(),
+                ]);
+
+            return $this->manufacturerInterface->create();
+
+            
+        }catch(Exception $e){
+            $this->logInterface->save([
+                'modele' => 'MANUFACTURER',
+                'action' => 'Tentative Redirection vers le formulaire d\'ajout',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
+            ]);
+        }
     }
 
     /**
@@ -36,11 +94,25 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $manufacturer = $this->manufacturerInterface->store($request);
         try {
+            $manufacturer = $this->manufacturerInterface->store($request);
             if ($manufacturer === null) {
+                $this->logInterface->save([
+                    'modele' => 'MANUFACTURER',
+                    'action' => 'Tentative d\'Ajout Manufactureer',
+                    'statut' => 'ECHEC',
+                    'message' => 'Une erreur esr survenue lors de l\'ajout d\'un manufactureur',
+                    'ip_address' => request()->ip(),
+                ]);
                 return redirect()->route('manufacturer.index')->with('error', 'Erreur lors de la création de l\'manufacturer');
             }else{
+                $this->logInterface->save([
+                    'modele' => 'MANUFACTURER',
+                    'action' => 'Ajout Manufactureer',
+                    'statut' => 'SUCCES',
+                    'message' => 'Manufacturer ajoute avec succes, id:'.$manufacturer->id,
+                    'ip_address' => request()->ip(),
+                ]);
                 return redirect()->route('manufacturer.index')->with('success', 'Manufacturer créé avec succès');
             }
         } catch (Exception $e) {
