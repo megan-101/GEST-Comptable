@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Utilisateur;
+use App\Models\Parametre;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UtilisateurEvent
+class ParametreEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-
-    public $action;
-    public $message;
-    public function __construct( $action, $message)
+    public function __construct(public Parametre $parametre)
     {
-        $this->action = $action;
-        $this->message = $message;
+        
     }
 
     /**

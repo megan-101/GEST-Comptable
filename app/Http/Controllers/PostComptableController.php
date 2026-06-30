@@ -2,57 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\PostComptableInterface;
 use Illuminate\Http\Request;
-use Illuminate\Models\PostComptable;
-use Illuminate\Services\PostComptableService;
-
 
 class PostComptableController extends Controller
 {
-    //
-     public function all(){
-            $listePostComptables = PostComptable::all();
-            return view('PostComptables.liste_PostComptables', compact('listePostComptables'));
+    protected $postComptableService;
 
-        } 
+    public function __construct(PostComptableInterface $postComptableService)
+    {
+        $this->postComptableService = $postComptableService;
+    }
 
-        public function formAjout(){
-            return view('PostComptables.form_ajout_PostComptables');
+    public function all()
+    {
+        $listePostComptables = $this->postComptableService->all();
 
-        } 
-        
-        public function create(Request $create){
-           $create->validate(
-           [
-                'id' =>'required',
-                'capacite' =>'required',
-                'libelle' =>'required',
-            ]
-        );
+        return view('postcomptables.liste_postcomptables', compact('listePostComptables'));
+    }
 
-        PostComptables::create($create->all());
-        return redirect()->route('PostComptable.All');
+    public function formAjout()
+    {
+        return view('postcomptables.form_ajout_postcomptables');
+    }
 
-        }
-        public function read( $id){
-          $PostComptable =  PostComptable::find($id);
+    public function create(Request $request)
+    {
+        $this->postComptableService->create($request);
 
+        return redirect()->route('postcomptable.All');
+    }
 
-        return view('PostComptables.consulter_PostComptables', compact('PostComptable'));
+    public function read($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
 
-        }
-        public function update(Request $create){
-          $PostComptable =  PostComptable::find($id);
+        return view('postcomptables.consulter_postcomptables', compact('postComptable'));
+    }
 
+    public function formModifier($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
 
-        return view('modifier_PostComptables', compact('PostComptable'));
+        return view('postcomptables.modifier_postcomptables', compact('postComptable'));
+    }
 
-        }
-        public function delete(Request $create){
-          $PostComptable =  PostComptable::find($id);
+    public function update(Request $request, $id)
+    {
+        $this->postComptableService->update($request, $id);
 
+        return redirect()->route('postcomptable.All');
+    }
 
-        return view('supprimer_PostComptable', compact('PostComptable'));
+    public function delete($id)
+    {
+        $postComptable = $this->postComptableService->find($id);
 
-        }
+        return view('postcomptables.supprimer_postcomptables', compact('postComptable'));
+    }
+
+    public function destroy($id)
+    {
+        $this->postComptableService->delete($id);
+
+        return redirect()->route('postcomptable.All');
+    }
 }

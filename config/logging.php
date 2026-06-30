@@ -52,11 +52,35 @@ return [
 
     'channels' => [
 
-        'ajout_Utilisateur' => [
+        // 'ajout_Utilisateur' => [
+        //     'driver' => 'single',
+        //     'path' => storage_path('logs/ajout_Utilisateur.log'),
+        //     'level' => 'debug',
+        // ],
+
+        //Création des chaines pour les 
+
+        'ajout_manufacturer' => [
             'driver' => 'single',
-            'path' => storage_path('logs/ajout_Utilisateur.log'),
-            'level' => 'debug',
+            'path' => storage_path('logs/ajout_manufacturer.log'),
+            'level'  => 'debug'
         ],
+        
+        'ajout_PostComptable' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/ajout_PostComptable.log'),
+            'level' => 'debug'
+        ],
+
+
+        'ajout_parametre'=> [
+            'driver' => 'single', 
+            'path' => storage_path('logs/ajout_paramtre.log'),
+            'level' => 'debug'
+        ],
+
+
+
 
         'stack' => [
             'driver' => 'stack',

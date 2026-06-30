@@ -5,14 +5,15 @@ namespace App\Providers;
 use App\Events\UtilisateurEvent;
 use App\Implementations\UtilisateurImpl;
 use App\Interfaces\UtilisateurInterface;
-use App\Listeners\CreateUtilisateurLister;
+// use App\Listeners\LogActionUserListener;
 use Illuminate\Support\ServiceProvider;
 
 class UtilisateurProvider extends ServiceProvider
 {
-    protected $listen = [
-        UtilisateurEvent::class => [CreateUtilisateurLister::class],
-    ];
+    // protected $listen = [
+    //     UtilisateurEvent::class => [LogActionUserListener::class],
+    // ];
+
     /**
      * Register services.
      */

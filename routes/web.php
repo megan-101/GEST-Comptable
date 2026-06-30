@@ -5,6 +5,7 @@ use App\Http\Controllers\BatimentsController;
 use App\Http\Controllers\PostComptableController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
+use App\Http\Controllers\ManufacturerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,6 +45,14 @@ Route::post('/utilisateur', [UtilisateurController::class, 'store'])->name('util
 Route::get('/utilisateur/{utilisateur}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
 Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
 Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
+
+Route::get('/manufacturer/all', [ManufacturerController::class, 'index'])->name('manufacturer.index');
+Route::get('/manufacturer/create', [ManufacturerController::class, 'create'])->name('manufacturer.create');
+Route::post('/manufacturer', [ManufacturerController::class, 'store'])->name('manufacturer.store');
+Route::get('/manufacturer/{manufacturer}/edit', [ManufacturerController::class, 'edit'])->name('manufacturer.edit');
+Route::put('/manufacturer/{manufacturer}', [ManufacturerController::class, 'update'])->name('manufacturer.update');
+Route::delete('/manufacturer/{manufacturer}', [ManufacturerController::class, 'destroy'])->name('manufacturer.destroy');
+
 Route::get('parametre/all', [ParametreController::class, 'all'])->name('parametre.All');
 Route::get('parametre/formAjout', [ParametreController::class, 'formAjout'])->name('parametre.formAjout');
 Route::post('parametre/Create', [ParametreController::class, 'create'])->name('parametre.create');
@@ -56,9 +65,12 @@ Route::get('parametre/destroy/{id}', [ParametreController::class, 'destroy'])->n
 
 
 
-Route::get('PostComptable/all', [PostComptablecontroller::class, 'all'])->name('PostComptable.All');
-Route::get('PostComptable/formAjout', [PostComptablecontroller::class, 'formAjout'])->name('PostComptable.formAjout');
-Route::post('PostComptable/Create', [PostComptablecontroller::class, 'create'])->name('PostComptable.create');
-Route::post('PostComptable/update', [PostComptablecontroller::class, 'update'])->name('PostComptable.update');
-Route::get('PostComptable/read/{id}', [PostComptablecontroller::class, 'read'])->name('PostComptable.read');
-Route::post('PostComptable/delete', [PostComptablecontroller::class, 'delete'])->name('PostComptable.delete');
+Route::get('postcomptable/all', [PostComptableController::class, 'all'])->name('postcomptable.All');
+Route::get('postcomptable/formAjout', [PostComptableController::class, 'formAjout'])->name('postcomptable.formAjout');
+Route::post('postcomptable/Create', [PostComptableController::class, 'create'])->name('postcomptable.create');
+Route::get('postcomptable/read/{id}', [PostComptableController::class, 'read'])->name('postcomptable.read');
+Route::get('postcomptable/formModifier/{id}', [PostComptableController::class, 'formModifier'])->name('postcomptable.formModifier');
+Route::post('postcomptable/update/{id}', [PostComptableController::class, 'update'])->name('postcomptable.update');
+Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
+Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
+
