@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\interfaces\LieuInterface;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LieuController extends Controller
 {
@@ -14,51 +16,163 @@ class LieuController extends Controller
         $this->lieuInterface = $lieuInterface;
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Liste de tous les lieux
+    // ─────────────────────────────────────────────────────────────
     public function all()
     {
-        return $this->lieuInterface->all();
+        try {
+            return $this->lieuInterface->all();
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error('[Controller] all() : ' . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'all',
+                'description'   => '[Controller] Erreur dans all().',
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Impossible de charger la liste des lieux.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Formulaire d'ajout
+    // ─────────────────────────────────────────────────────────────
     public function formAjout()
     {
-        return $this->lieuInterface->formAjout();
+        try {
+            return $this->lieuInterface->formAjout();
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error('[Controller] formAjout() : ' . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'formAjout',
+                'description'   => '[Controller] Erreur dans formAjout().',
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Impossible de charger le formulaire d\'ajout.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Création d'un lieu
+    // ─────────────────────────────────────────────────────────────
     public function create(Request $request)
     {
-        return $this->lieuInterface->create($request);
+        try {
+            return $this->lieuInterface->create($request);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error('[Controller] create() : ' . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'create',
+                'description'   => '[Controller] Erreur dans create().',
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Erreur lors de la création du lieu.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Consulter un lieu
+    // ─────────────────────────────────────────────────────────────
     public function read($id)
     {
-        return $this->lieuInterface->read($id);
+        try {
+            return $this->lieuInterface->read($id);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error("[Controller] read({$id}) : " . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'read',
+                'description'   => "[Controller] Erreur dans read({$id}).",
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Lieu introuvable.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Formulaire de modification
+    // ─────────────────────────────────────────────────────────────
     public function formUpdate($id)
     {
-        return $this->lieuInterface->formUpdate($id);
+        try {
+            return $this->lieuInterface->formUpdate($id);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error("[Controller] formUpdate({$id}) : " . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'formUpdate',
+                'description'   => "[Controller] Erreur dans formUpdate({$id}).",
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Lieu introuvable.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Mise à jour d'un lieu
+    // ─────────────────────────────────────────────────────────────
     public function update(Request $request, $id)
     {
-        return $this->lieuInterface->update($request, $id);
+        try {
+            return $this->lieuInterface->update($request, $id);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error("[Controller] update({$id}) : " . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'update',
+                'description'   => "[Controller] Erreur dans update({$id}).",
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Erreur lors de la mise à jour du lieu.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Confirmation de suppression
+    // ─────────────────────────────────────────────────────────────
     public function confirmDelete($id)
     {
-        return $this->lieuInterface->confirmDelete($id);
+        try {
+            return $this->lieuInterface->confirmDelete($id);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error("[Controller] confirmDelete({$id}) : " . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'confirmDelete',
+                'description'   => "[Controller] Erreur dans confirmDelete({$id}).",
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Lieu introuvable.');
+        }
     }
 
+    // ─────────────────────────────────────────────────────────────
     // Suppression d'un lieu
+    // ─────────────────────────────────────────────────────────────
     public function delete(Request $request)
     {
-        return $this->lieuInterface->delete($request);
+        try {
+            return $this->lieuInterface->delete($request);
+        } catch (\Exception $e) {
+            Log::channel('ajout_lieu')->error('[Controller] delete() : ' . $e->getMessage());
+            ActivityLog::create([
+                'module'        => 'Lieu',
+                'action'        => 'delete',
+                'description'   => '[Controller] Erreur dans delete().',
+                'status'        => 'error',
+                'error_message' => $e->getMessage(),
+            ]);
+            return redirect()->back()->with('error', 'Erreur lors de la suppression du lieu.');
+        }
     }
 }
