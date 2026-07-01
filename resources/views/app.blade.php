@@ -35,8 +35,11 @@
             <a class="nav-link" href="{{ route('parametre.All') }}">Liste Paramètres</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste Post comptable</a>
-        </li>
+            <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste Post comptable</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('lignecomptable.index') }}">Lignes comptables</a>
+          </li>
         </ul>
       </div>
   </nav>

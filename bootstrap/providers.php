@@ -3,6 +3,7 @@
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\Lieu::class,
+    App\Providers\LigneComptableProvider::class,
     App\Providers\LogProvider::class,
     App\Providers\ManufacturerProvider::class,
     App\Providers\ParametreProvider::class,
