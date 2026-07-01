@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Utilisateur;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateurSeeder extends Seeder
 {
@@ -12,6 +14,11 @@ class UtilisateurSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Utilisateur::create([
+            'matricule' => 'ADM001',
+            'login' => 'test',
+            'nom' => 'Administrateur',
+            'mdp' => bcrypt('password1234'),
+        ])->assignRole('Admin');
     }
 }

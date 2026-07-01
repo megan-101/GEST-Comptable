@@ -9,8 +9,12 @@ use App\Http\Controllers\ManufacturerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('app');
+    return view('welcome');
 });
+
+Route::get('/app', function () {
+    return view('app');
+})->name('app');
 
 // Route::get('utilisateur/all', [Utilisateurcontroller::class, 'all'])->name('utilisateur.All');
 // Route::get('utilisateur/formAjout', [Utilisateurcontroller::class, 'formAjout'])->name('utilisateur.formAjout');
@@ -74,3 +78,16 @@ Route::post('postcomptable/update/{id}', [PostComptableController::class, 'updat
 Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
 Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
 
+use App\Http\Controllers\ProfileController;
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

@@ -51,6 +51,16 @@
                                                 Supprimer
                                             </button>
                                         </form>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Dropdown
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
