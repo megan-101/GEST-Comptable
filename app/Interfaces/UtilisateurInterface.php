@@ -4,6 +4,7 @@ namespace App\Interfaces;
 
 use App\Models\Utilisateur;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 
@@ -11,7 +12,7 @@ interface UtilisateurInterface{
 
     // les interfaces ne contiennent que les def des fonctions donc le nom son type et ses arguments et n'a acune logique d'implementation
 
-    public function index(): View;
+    public function index(): Collection;
 
     public function create(): View;
 

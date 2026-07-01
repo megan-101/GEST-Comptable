@@ -63,10 +63,8 @@ class ManufacturerController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        
+    { 
         try{
-
             $this->logInterface->save([
                     'modele' => 'MANUFACTURER',
                     'action' => 'Redirection vers le formulaire d\'ajout',
@@ -75,9 +73,7 @@ class ManufacturerController extends Controller
                     'ip_address' => request()->ip(),
                 ]);
 
-            return $this->manufacturerInterface->create();
-
-            
+            return $this->manufacturerInterface->create();  
         }catch(Exception $e){
             $this->logInterface->save([
                 'modele' => 'MANUFACTURER',
