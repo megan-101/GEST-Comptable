@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Event;
 
 class ParametreProvider extends ServiceProvider
 {   
-    protected $listen = [
-        ParametreEvent::class => [CreateParametre::class],
-        ParametreActivityEvent::class => [LogParametreActivity::class],
-    ];
+    // protected $listen = [
+    //     ParametreEvent::class => [CreateParametre::class],
+    //     ParametreActivityEvent::class => [LogParametreActivity::class],
+    // ];
     /**
      * Register services.
      */
