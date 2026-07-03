@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\LogInterface;
+
 use App\Models\Utilisateur;
 use App\Interfaces\UtilisateurInterface;
 use App\Interfaces\LogInterface;
