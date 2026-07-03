@@ -37,6 +37,9 @@
           <li class="nav-item">
           <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste Post comptable</a>
         </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('ecriture.index') }}">Écritures Comptables</a>
+          </li>
         </ul>
       </div>
   </nav>

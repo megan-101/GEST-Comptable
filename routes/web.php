@@ -6,6 +6,7 @@ use App\Http\Controllers\PostComptableController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\EcritureComptableController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -73,4 +74,11 @@ Route::get('postcomptable/formModifier/{id}', [PostComptableController::class, '
 Route::post('postcomptable/update/{id}', [PostComptableController::class, 'update'])->name('postcomptable.update');
 Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
 Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
+
+// ---- Routes Ecriture Comptable ----
+Route::get('/ecriture', [EcritureComptableController::class, 'index'])->name('ecriture.index');
+Route::get('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'show'])->name('ecriture.show');
+Route::get('/ecriture/{ecritureComptable}/edit', [EcritureComptableController::class, 'edit'])->name('ecriture.edit');
+Route::put('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'update'])->name('ecriture.update');
+
 

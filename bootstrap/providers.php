@@ -8,4 +8,5 @@ return [
     App\Providers\ParametreProvider::class,
     App\Providers\PostComptableProvider::class,
     App\Providers\UtilisateurProvider::class,
+    App\Providers\EcritureComptableProvider::class,
 ];
