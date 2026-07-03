@@ -12,7 +12,7 @@ class PostComptableEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public PostComptable $postComptable)
+    public function __construct(public PostComptable $postomptable)
     {
     }
 

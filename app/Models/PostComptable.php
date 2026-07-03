@@ -12,5 +12,5 @@ class PostComptable extends Model
 
     protected $fillable = ['capacite', 'libelle'];
 
-    protected $table = 'post_comptables';
+    protected $table = 'postComptable';
 }
