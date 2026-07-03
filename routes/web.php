@@ -49,6 +49,7 @@ Route::post('/utilisateur', [UtilisateurController::class, 'store'])->name('util
 Route::get('/utilisateur/{utilisateur}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
 Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
 Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
+Route::patch('/utilisateur/{utilisateur}/toggle-status', [UtilisateurController::class, 'toggleStatus'])->name('utilisateur.toggle_status');
 
 Route::get('/manufacturer/all', [ManufacturerController::class, 'index'])->name('manufacturer.index');
 Route::get('/manufacturer/create', [ManufacturerController::class, 'create'])->name('manufacturer.create');

@@ -51,16 +51,13 @@
                                                 Supprimer
                                             </button>
                                         </form>
-                                        <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                Dropdown
+                                        <form action="{{ route('utilisateur.toggle_status', $utilisateur) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-sm {{ $utilisateur->is_active ? 'btn-outline-warning' : 'btn-outline-success' }}" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                                {{ $utilisateur->is_active ? 'Désactiver' : 'Activer' }}
                                             </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                            </ul>
-                                        </div>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

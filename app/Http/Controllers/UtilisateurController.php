@@ -231,4 +231,32 @@ class UtilisateurController extends Controller
             return redirect()->route('utilisateur.index')->with('error', 'Erreur lors de la suppression de l\'utilisateur: ' . $e->getMessage());
         }
     }
+    /**
+     * Activer ou désactiver l'utilisateur.
+     */
+    public function toggleStatus(Utilisateur $utilisateur)
+    {
+        try {
+            $result = $utilisateur->update(['is_active' => !$utilisateur->is_active]);
+            $nouveauStatut = $utilisateur->is_active ? 'activé' : 'désactivé';
+            
+            $this->logInterface->save([
+                'modele' => 'UTILISATEUR',
+                'action' => 'Modification statut d\'un Utilisateur',
+                'statut' => 'SUCCES',
+                'message' => 'Statut '.$nouveauStatut.' avec succes, id:'.$utilisateur->id,
+                'ip_address' => request()->ip(),
+            ]);
+            return back()->with('success', 'Le statut du compte a été mis à jour avec succès.');
+        } catch (Exception $e) {
+            $this->logInterface->save([
+                'modele' => 'UTILISATEUR',
+                'action' => 'Tentative modification statut Utilisateur',
+                'statut' => 'ECHEC',
+                'message' => 'Erreur: '.$e->getMessage(),
+                'ip_address' => request()->ip(),
+            ]);
+            return back()->with('error', 'Erreur lors de la mise à jour du statut : ' . $e->getMessage());
+        }
+    }
 }

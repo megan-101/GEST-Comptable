@@ -19,6 +19,7 @@ class Utilisateur extends Authenticatable
         "nom",
         "mdp",
         "email",
+        "is_active",
         "remember_token",       
     ];
 
