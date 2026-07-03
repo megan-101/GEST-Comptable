@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         Lieu::factory(10)->create();
         EcritureComptable::factory(10)->create();
+        $this->call([
+            LigneComptableSeeder::class,
+        ]);
     }
 }
