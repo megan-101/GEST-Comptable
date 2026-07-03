@@ -10,4 +10,5 @@ return [
     App\Providers\PostComptableProvider::class,
     App\Providers\UtilisateurProvider::class,
     App\Providers\EcritureComptableProvider::class,
+    App\Providers\OperationComptableProvider::class,
 ];

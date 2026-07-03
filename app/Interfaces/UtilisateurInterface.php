@@ -6,10 +6,13 @@ use App\Models\Utilisateur;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-
-interface UtilisateurInterface{
-
-    // les interfaces ne contiennent que les def des fonctions donc le nom son type et ses arguments et n'a acune logique d'implementation
+interface UtilisateurInterface
+{
+    /**
+     * Les interfaces ne contiennent que les définitions des fonctions.
+     * Nom de la fonction, type de retour et ses arguments.
+     * Aucune logique métier n'est implémentée dans les interfaces.
+     */
 
     public function index(): View;
 
@@ -21,6 +24,5 @@ interface UtilisateurInterface{
 
     public function update(Request $request, Utilisateur $utilisateur): bool;
 
-    public function destroy(Utilisateur $utilisateur): bool|null;
-    
+    public function destroy(Utilisateur $utilisateur): bool;
 }

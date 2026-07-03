@@ -13,5 +13,5 @@ class Lieu extends Model
     // les champs à remplir
     protected $fillable = ['code', 'libelle', 'adresse'];
 
-    protected $table = 'lieux';
+    protected $table = 'lieux'; 
 }
