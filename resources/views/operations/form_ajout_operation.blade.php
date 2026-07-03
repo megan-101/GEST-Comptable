@@ -7,7 +7,7 @@
 <h1>Ajout d'une Opération Comptable</h1>
 <hr />
 
-<a class="btn btn-secondary mb-3" href="{{ route('operation.All') }}">Retour à la liste</a>
+<a class="btn btn-secondary mb-3" href="{{ route('operation.all') }}">Retour à la liste</a>
 
 <div class="card" style="max-width: 700px;">
     <div class="card-body">

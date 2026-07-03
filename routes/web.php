@@ -32,7 +32,7 @@ Route::post('/operation/create', [OperationComptableController::class, 'create']
 Route::get('/operation/{id}', [OperationComptableController::class, 'read'])->name('operation.read');
 Route::get('/operation/{id}/form-update', [OperationComptableController::class, 'formUpdate'])->name('operation.formUpdate');
 Route::post('/operation/{id}/update', [OperationComptableController::class, 'update'])->name('operation.update');
-Route::get('/operation/{id}/confirm-delete', [OperationComptableController::class, 'confirmDelete'])->name('confirmDelete');
+Route::get('/operation/{id}/confirm-delete', [OperationComptableController::class, 'confirmDelete'])->name('operation.confirmDelete');
 Route::post('/operation/delete', [OperationComptableController::class, 'delete'])->name('delete');
 
 Route::get('/ligne-comptable/all', [LigneComptableController::class, 'index'])->name('lignecomptable.index');
