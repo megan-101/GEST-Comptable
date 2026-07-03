@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Services;
-
-use App\Models\Utilisateur;
-use Illuminate\Http\Request;
+namespace App\Implementations;
 
 
-class UtilisateurService {
-    public function index(){
+class UserImplementation  implements UserInterface
+{
+
+     public function index(): View{
         $utilisateurs = Utilisateur::all();
         return view('utilisateur.index', compact('utilisateurs') );
     }
 
-    public function create(){
+    public function create(): View{
         return view('utilisateur.create');
     }
 
@@ -47,5 +46,5 @@ class UtilisateurService {
         $utilisateur->delete();
         return redirect()->route('utilisateur.index')->with('success', 'Utilisateur supprimé avec succès');
     }
-}
 
+}
