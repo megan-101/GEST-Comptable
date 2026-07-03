@@ -6,15 +6,46 @@ use App\Http\Controllers\PostComptableController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\LigneComptableController;
+use App\Http\Controllers\EcritureComptableController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OperationComptableController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
 Route::get('/app', function () {
     return view('app');
-})->name('app');
+})->middleware(['auth'])->name('app');
+
+
+Route::get('/operation/all', [OperationComptableController::class, 'all'])->name('operation.all');
+Route::get('/operation/form-ajout', [OperationComptableController::class, 'formAjout'])->name('operation.formAjout');
+Route::post('/operation/create', [OperationComptableController::class, 'create'])->name('operation.create');
+Route::get('/operation/{id}', [OperationComptableController::class, 'read'])->name('operation.read');
+Route::get('/operation/{id}/form-update', [OperationComptableController::class, 'formUpdate'])->name('operation.formUpdate');
+Route::post('/operation/{id}/update', [OperationComptableController::class, 'update'])->name('operation.update');
+Route::get('/operation/{id}/confirm-delete', [OperationComptableController::class, 'confirmDelete'])->name('confirmDelete');
+Route::post('/operation/delete', [OperationComptableController::class, 'delete'])->name('delete');
+
+Route::get('/ligne-comptable/all', [LigneComptableController::class, 'index'])->name('lignecomptable.index');
+Route::get('/ligne-comptable/read/{id}', [LigneComptableController::class, 'show'])->name('lignecomptable.show');
+
+// ---- Routes Ecriture Comptable ----
+Route::get('/ecriture', [EcritureComptableController::class, 'index'])->name('ecriture.index');
+Route::get('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'show'])->name('ecriture.show');
+Route::get('/ecriture/{ecritureComptable}/edit', [EcritureComptableController::class, 'edit'])->name('ecriture.edit');
+Route::put('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'update'])->name('ecriture.update');
+
+
+
 
 // Route::get('utilisateur/all', [Utilisateurcontroller::class, 'all'])->name('utilisateur.All');
 // Route::get('utilisateur/formAjout', [Utilisateurcontroller::class, 'formAjout'])->name('utilisateur.formAjout');
@@ -78,18 +109,12 @@ Route::middleware('auth')->group(function () {
     Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
     Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
 
-});
-
-use App\Http\Controllers\ProfileController;
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
 
 require __DIR__ . '/auth.php';
