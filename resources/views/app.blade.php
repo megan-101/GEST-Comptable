@@ -40,6 +40,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('lignecomptable.index') }}">Lignes comptables</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('ecriture.index') }}">Écritures Comptables</a>
+          </li>
         </ul>
       </div>
   </nav>

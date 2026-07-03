@@ -7,6 +7,7 @@ use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\LigneComptableController;
+use App\Http\Controllers\EcritureComptableController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -77,5 +78,10 @@ Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destr
 
 Route::get('ligne-comptable/all', [LigneComptableController::class, 'index'])->name('lignecomptable.index');
 Route::get('ligne-comptable/read/{id}', [LigneComptableController::class, 'show'])->name('lignecomptable.show');
+// ---- Routes Ecriture Comptable ----
+Route::get('/ecriture', [EcritureComptableController::class, 'index'])->name('ecriture.index');
+Route::get('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'show'])->name('ecriture.show');
+Route::get('/ecriture/{ecritureComptable}/edit', [EcritureComptableController::class, 'edit'])->name('ecriture.edit');
+Route::put('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'update'])->name('ecriture.update');
 
 
