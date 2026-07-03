@@ -18,6 +18,7 @@ class UtilisateurSeeder extends Seeder
             'matricule' => 'ADM001',
             'login' => 'test',
             'nom' => 'Administrateur',
+            'email' => 'admin@gmail.com',
             'mdp' => bcrypt('password1234'),
         ])->assignRole('Admin');
     }
