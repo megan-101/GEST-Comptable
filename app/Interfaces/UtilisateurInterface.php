@@ -1,16 +1,28 @@
 <?php
-namespace App\Interface 
 
-interface UtilisateurInteface
+namespace App\Interfaces;
+
+use App\Models\Utilisateur;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+
+interface UtilisateurInterface
 {
-
     /**
-     * les interface ne contienne que les definitions des fonctions 
-     * nom de la fonction , type , et ses arguments 
-     * aucune logique metier n'est implementer dans les interface 
+     * Les interfaces ne contiennent que les définitions des fonctions.
+     * Nom de la fonction, type de retour et ses arguments.
+     * Aucune logique métier n'est implémentée dans les interfaces.
      */
 
-    public function index () : view ; 
+    public function index(): View;
 
-    public function store (Request $request) : 
+    public function create(): View;
+
+    public function store(Request $request): Utilisateur;
+
+    public function edit(Utilisateur $utilisateur): View;
+
+    public function update(Request $request, Utilisateur $utilisateur): bool;
+
+    public function destroy(Utilisateur $utilisateur): bool;
 }

@@ -6,15 +6,15 @@ use App\Events\ManufacturerEvent;
 use App\Interfaces\ManufacturerInterface;
 use App\Models\Manufacturer;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 
 
 
 class ManufacturerImpl implements ManufacturerInterface{
-    public function index(): View{
-        $manufacturers = Manufacturer::all();
-        return view('manufacturer.index', compact('manufacturers') );
+    public function getAll(){
+        return Manufacturer::all();
     }
 
     public function create(): View{

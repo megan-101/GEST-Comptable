@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\interfaces\LieuInterface;
-use App\Models\ActivityLog;
+use App\Interfaces\LogInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class LieuController extends Controller
 {
     protected LieuInterface $lieuInterface;
+    protected LogInterface $logInterface;
 
-    public function __construct(LieuInterface $lieuInterface)
+    public function __construct(LieuInterface $lieuInterface, LogInterface $logInterface)
     {
         $this->lieuInterface = $lieuInterface;
+        $this->logInterface = $logInterface;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -22,15 +23,32 @@ class LieuController extends Controller
     public function all()
     {
         try {
-            return $this->lieuInterface->all();
+            $lieux = $this->lieuInterface->all();
+            if ($lieux === null) {
+                $this->logInterface->save([
+                    'modele' => 'LIEU',
+                    'action' => 'Tentative de Lister Tous les Lieux',
+                    'statut' => 'ECHEC',
+                    'message' => 'Une erreur est survenue lors de la récupération des lieux',
+                    'ip_address' => request()->ip(),
+                ]);
+            } else {
+                $this->logInterface->save([
+                    'modele' => 'LIEU',
+                    'action' => 'Lister Tous les Lieux',
+                    'statut' => 'SUCCES',
+                    'message' => 'Tous les lieux ont été affichés avec succès',
+                    'ip_address' => request()->ip(),
+                ]);
+            }
+            return $lieux;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error('[Controller] all() : ' . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'all',
-                'description'   => '[Controller] Erreur dans all().',
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de Lister Tous les Lieux',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Impossible de charger la liste des lieux.');
         }
@@ -42,15 +60,21 @@ class LieuController extends Controller
     public function formAjout()
     {
         try {
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Redirection vers le formulaire d\'ajout',
+                'statut' => 'SUCCES',
+                'message' => 'Affichage du formulaire d\'ajout avec succès',
+                'ip_address' => request()->ip(),
+            ]);
             return $this->lieuInterface->formAjout();
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error('[Controller] formAjout() : ' . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'formAjout',
-                'description'   => '[Controller] Erreur dans formAjout().',
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de redirection vers le formulaire d\'ajout',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Impossible de charger le formulaire d\'ajout.');
         }
@@ -62,15 +86,22 @@ class LieuController extends Controller
     public function create(Request $request)
     {
         try {
-            return $this->lieuInterface->create($request);
+            $response = $this->lieuInterface->create($request);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Ajout Lieu',
+                'statut' => 'SUCCES',
+                'message' => 'Lieu ajouté avec succès',
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error('[Controller] create() : ' . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'create',
-                'description'   => '[Controller] Erreur dans create().',
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative d\'Ajout Lieu',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Erreur lors de la création du lieu.');
         }
@@ -82,15 +113,22 @@ class LieuController extends Controller
     public function read($id)
     {
         try {
-            return $this->lieuInterface->read($id);
+            $response = $this->lieuInterface->read($id);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Consulter un Lieu',
+                'statut' => 'SUCCES',
+                'message' => 'Lieu consulté avec succès, id: ' . $id,
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error("[Controller] read({$id}) : " . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'read',
-                'description'   => "[Controller] Erreur dans read({$id}).",
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de consulter un Lieu',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Lieu introuvable.');
         }
@@ -102,15 +140,22 @@ class LieuController extends Controller
     public function formUpdate($id)
     {
         try {
-            return $this->lieuInterface->formUpdate($id);
+            $response = $this->lieuInterface->formUpdate($id);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Redirection vers le formulaire de modification',
+                'statut' => 'SUCCES',
+                'message' => 'Affichage du formulaire de modification avec succès, id: ' . $id,
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error("[Controller] formUpdate({$id}) : " . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'formUpdate',
-                'description'   => "[Controller] Erreur dans formUpdate({$id}).",
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de redirection vers le formulaire de modification',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Lieu introuvable.');
         }
@@ -122,15 +167,22 @@ class LieuController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            return $this->lieuInterface->update($request, $id);
+            $response = $this->lieuInterface->update($request, $id);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Modification de Lieu',
+                'statut' => 'SUCCES',
+                'message' => 'Lieu modifié avec succès, id: ' . $id,
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error("[Controller] update({$id}) : " . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'update',
-                'description'   => "[Controller] Erreur dans update({$id}).",
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de modification de Lieu',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Erreur lors de la mise à jour du lieu.');
         }
@@ -142,15 +194,22 @@ class LieuController extends Controller
     public function confirmDelete($id)
     {
         try {
-            return $this->lieuInterface->confirmDelete($id);
+            $response = $this->lieuInterface->confirmDelete($id);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Redirection vers le formulaire de suppression',
+                'statut' => 'SUCCES',
+                'message' => 'Affichage du formulaire de confirmation de suppression pour le lieu id: ' . $id,
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error("[Controller] confirmDelete({$id}) : " . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'confirmDelete',
-                'description'   => "[Controller] Erreur dans confirmDelete({$id}).",
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de redirection vers le formulaire de suppression',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Lieu introuvable.');
         }
@@ -162,17 +221,25 @@ class LieuController extends Controller
     public function delete(Request $request)
     {
         try {
-            return $this->lieuInterface->delete($request);
+            $response = $this->lieuInterface->delete($request);
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Suppression de Lieu',
+                'statut' => 'SUCCES',
+                'message' => 'Lieu supprimé avec succès, id: ' . $request->id,
+                'ip_address' => request()->ip(),
+            ]);
+            return $response;
         } catch (\Exception $e) {
-            Log::channel('ajout_lieu')->error('[Controller] delete() : ' . $e->getMessage());
-            ActivityLog::create([
-                'module'        => 'Lieu',
-                'action'        => 'delete',
-                'description'   => '[Controller] Erreur dans delete().',
-                'status'        => 'error',
-                'error_message' => $e->getMessage(),
+            $this->logInterface->save([
+                'modele' => 'LIEU',
+                'action' => 'Tentative de suppression de Lieu',
+                'statut' => 'ECHEC',
+                'message' => $e->getMessage(),
+                'ip_address' => request()->ip(),
             ]);
             return redirect()->back()->with('error', 'Erreur lors de la suppression du lieu.');
         }
     }
 }
+
