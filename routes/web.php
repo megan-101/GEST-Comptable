@@ -6,6 +6,7 @@ use App\Http\Controllers\PostComptableController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\TraceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -73,4 +74,7 @@ Route::get('postcomptable/formModifier/{id}', [PostComptableController::class, '
 Route::post('postcomptable/update/{id}', [PostComptableController::class, 'update'])->name('postcomptable.update');
 Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
 Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
+
+Route::get('/traces',[TraceController::class,'index'])->name('traces.All');
+Route::get('/traces/{id}',[TraceController::class,'liste'])->name('traces.read');
 
