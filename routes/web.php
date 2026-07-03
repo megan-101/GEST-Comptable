@@ -7,6 +7,7 @@ use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\EcritureComptableController;
+use App\Http\Controllers\CompteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -81,4 +82,11 @@ Route::get('/ecriture/{ecritureComptable}', [EcritureComptableController::class,
 Route::get('/ecriture/{ecritureComptable}/edit', [EcritureComptableController::class, 'edit'])->name('ecriture.edit');
 Route::put('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'update'])->name('ecriture.update');
 
-
+// ---- Routes Compte ----
+Route::get('/compte', [CompteController::class, 'index'])->name('compte.index');
+Route::get('/compte/create', [CompteController::class, 'create'])->name('compte.create');
+Route::post('/compte', [CompteController::class, 'store'])->name('compte.store');
+Route::get('/compte/{compte}', [CompteController::class, 'show'])->name('compte.show');
+Route::get('/compte/{compte}/edit', [CompteController::class, 'edit'])->name('compte.edit');
+Route::put('/compte/{compte}', [CompteController::class, 'update'])->name('compte.update');
+Route::delete('/compte/{compte}', [CompteController::class, 'destroy'])->name('compte.destroy');
