@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\LogInterface;
+
 use App\Models\Utilisateur;
 <<<<<<< HEAD
 use App\Services\UtilisateurService;
 =======
 use App\Interfaces\UtilisateurInterface;
->>>>>>> origin/dev
+use App\Interfaces\LogInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;

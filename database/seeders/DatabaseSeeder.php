@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
 <<<<<<< HEAD
 =======
         EcritureComptable::factory(10)->create();
->>>>>>> origin/dev
+        $this->call([
+            LigneComptableSeeder::class,
+        ]);
     }
 }
