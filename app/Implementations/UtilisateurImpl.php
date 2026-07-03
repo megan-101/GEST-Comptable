@@ -28,7 +28,8 @@ class UtilisateurImpl implements UtilisateurInterface{
             "matricule" => "required|unique:utilisateurs|max:255",
             "login" => "required|unique:utilisateurs|max:255",
             "nom" => "required|max:255",
-            "mdp" => "required|max:255"
+            "mdp" => "required|max:255",
+            "email" => "required|email|max:255",
         ]);
 
         $Utilisateur = Utilisateur::create($request->all());
@@ -44,7 +45,8 @@ class UtilisateurImpl implements UtilisateurInterface{
             "matricule" => "required|unique:utilisateurs,matricule," . $utilisateur->id . "|max:255",
             "login" => "required|unique:utilisateurs,login," . $utilisateur->id . "|max:255",
             "nom" => "required|max:255",
-            "mdp" => "required|max:255"
+            "mdp" => "required|max:255",
+            "email" => "required|email|max:255",
         ]);
 
         $result = $utilisateur->update($request->all());

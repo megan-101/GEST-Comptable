@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('login')->unique();
             $table->string('nom');
             $table->string('mdp');
+            $table->string('email')->unique();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

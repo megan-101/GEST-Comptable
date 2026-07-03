@@ -17,7 +17,9 @@ class Utilisateur extends Authenticatable
         "matricule",
         "login",
         "nom",
-        "mdp"
+        "mdp",
+        "email",
+        "remember_token",       
     ];
 
     public function getAuthIdentifier()
