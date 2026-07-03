@@ -5,23 +5,80 @@ use App\Http\Controllers\BatimentsController;
 use App\Http\Controllers\PostComptableController;
 use App\Http\Controllers\LieuController;
 use App\Http\Controllers\ParametreController;
+<<<<<<< HEAD
 use App\Http\Controllers\ModeleTransformationController;
+=======
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\LigneComptableController;
+use App\Http\Controllers\EcritureComptableController;
+use App\Http\Controllers\ProfileController;
+>>>>>>> origin/dev
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OperationComptableController;
 
 Route::get('/', function () {
     return view('app');
 });
 
-Route::get('utilisateur/all', [Utilisateurcontroller::class, 'all'])->name('utilisateur.All');
-Route::get('utilisateur/formAjout', [Utilisateurcontroller::class, 'formAjout'])->name('utilisateur.formAjout');
-Route::post('utilisateur/Create', [Utilisateurcontroller::class, 'create'])->name('utilisateur.create');
-Route::post('utilisateur/update', [Utilisateurcontroller::class, 'update'])->name('utilisateur.update');
-Route::get('utilisateur/read/{id}', [Utilisateurcontroller::class, 'read'])->name('utilisateur.read');
-Route::post('utilisateur/delete', [Utilisateurcontroller::class, 'delete'])->name('utilisateur.delete');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//___________-------
+    // ─────────────────────────────────────────────────────────────
+    // Routes Opérations Comptables
+    // ─────────────────────────────────────────────────────────────
+    Route::prefix('operations')->name('operation.')->group(function () {
+        Route::get('/', [OperationComptableController::class, 'all'])->name('All');
+        Route::get('/form-ajout', [OperationComptableController::class, 'formAjout'])->name('formAjout');
+        Route::post('/create', [OperationComptableController::class, 'create'])->name('create');
+        Route::get('/{id}', [OperationComptableController::class, 'read'])->name('read');
+        Route::get('/{id}/form-update', [OperationComptableController::class, 'formUpdate'])->name('formUpdate');
+        Route::post('/{id}/update', [OperationComptableController::class, 'update'])->name('update');
+        Route::get('/{id}/confirm-delete', [OperationComptableController::class, 'confirmDelete'])->name('confirmDelete');
+        Route::post('/delete', [OperationComptableController::class, 'delete'])->name('delete');
+    });
+});
+
+Route::get('ligne-comptable/all', [LigneComptableController::class, 'index'])->name('lignecomptable.index');
+Route::get('ligne-comptable/read/{id}', [LigneComptableController::class, 'show'])->name('lignecomptable.show');
+// ---- Routes Ecriture Comptable ----
+Route::get('/ecriture', [EcritureComptableController::class, 'index'])->name('ecriture.index');
+Route::get('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'show'])->name('ecriture.show');
+Route::get('/ecriture/{ecritureComptable}/edit', [EcritureComptableController::class, 'edit'])->name('ecriture.edit');
+Route::put('/ecriture/{ecritureComptable}', [EcritureComptableController::class, 'update'])->name('ecriture.update');
+
+<<<<<<< HEAD
 Route::get('batiment/all', [Batimentscontroller::class, 'all'])->name('batiment.All'); Route::get('batiment/formAjout', [Batimentscontroller::class, 'formAjout'])->name('batiment.formAjout'); Route::post('batiment/Create', [Batimentscontroller::class, 'create'])->name('batiment.create'); Route::post('batiment/update', [Batimentscontroller::class, 'update'])->name('batiment.update'); Route::get('batiment/read/{id}', [Batimentscontroller::class, 'read'])->name('batiment.read'); Route::post('batiment/delete', [Batimentscontroller::class, 'delete'])->name('batiment.delete');
 
 
+=======
+
+Route::get('/app', function () {
+    return view('app');
+})->name('app');
+
+// Route::get('utilisateur/all', [Utilisateurcontroller::class, 'all'])->name('utilisateur.All');
+// Route::get('utilisateur/formAjout', [Utilisateurcontroller::class, 'formAjout'])->name('utilisateur.formAjout');
+// Route::post('utilisateur/Create', [Utilisateurcontroller::class, 'create'])->name('utilisateur.create');
+// Route::post('utilisateur/update', [Utilisateurcontroller::class, 'update'])->name('utilisateur.update');
+// Route::get('utilisateur/read/{id}', [Utilisateurcontroller::class, 'read'])->name('utilisateur.read');
+// Route::post('utilisateur/delete', [Utilisateurcontroller::class, 'delete'])->name('utilisateur.delete');
+
+
+// Route::get('batiment/all', [Batimentscontroller::class, 'all'])->name('batiment.All');
+// Route::get('batiment/formAjout', [Batimentscontroller::class, 'formAjout'])->name('batiment.formAjout');
+// Route::post('batiment/Create', [Batimentscontroller::class, 'create'])->name('batiment.create');
+// Route::post('batiment/update', [Batimentscontroller::class, 'update'])->name('batiment.update');
+// Route::get('batiment/read/{id}', [Batimentscontroller::class, 'read'])->name('batiment.read');
+// Route::post('batiment/delete', [Batimentscontroller::class, 'delete'])->name('batiment.delete');
+
+
+>>>>>>> origin/dev
 // ---- Routes Lieu ----
 Route::get('lieu/all', [LieuController::class, 'all'])->name('lieu.All');
 Route::get('lieu/formAjout', [LieuController::class, 'formAjout'])->name('lieu.formAjout');
@@ -39,6 +96,18 @@ Route::post('/utilisateur', [UtilisateurController::class, 'store'])->name('util
 Route::get('/utilisateur/{utilisateur}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
 Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
 Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
+<<<<<<< HEAD
+=======
+Route::patch('/utilisateur/{utilisateur}/toggle-status', [UtilisateurController::class, 'toggleStatus'])->name('utilisateur.toggle_status');
+
+Route::get('/manufacturer/all', [ManufacturerController::class, 'index'])->name('manufacturer.index');
+Route::get('/manufacturer/create', [ManufacturerController::class, 'create'])->name('manufacturer.create');
+Route::post('/manufacturer', [ManufacturerController::class, 'store'])->name('manufacturer.store');
+Route::get('/manufacturer/{manufacturer}/edit', [ManufacturerController::class, 'edit'])->name('manufacturer.edit');
+Route::put('/manufacturer/{manufacturer}', [ManufacturerController::class, 'update'])->name('manufacturer.update');
+Route::delete('/manufacturer/{manufacturer}', [ManufacturerController::class, 'destroy'])->name('manufacturer.destroy');
+
+>>>>>>> origin/dev
 Route::get('parametre/all', [ParametreController::class, 'all'])->name('parametre.All');
 Route::get('parametre/formAjout', [ParametreController::class, 'formAjout'])->name('parametre.formAjout');
 Route::post('parametre/Create', [ParametreController::class, 'create'])->name('parametre.create');
@@ -51,6 +120,7 @@ Route::get('parametre/destroy/{id}', [ParametreController::class, 'destroy'])->n
 
 
 
+<<<<<<< HEAD
 Route::get('PostComptable/all', [PostComptablecontroller::class, 'all'])->name('PostComptable.All');
 Route::get('PostComptable/formAjout', [PostComptablecontroller::class, 'formAjout'])->name('PostComptable.formAjout');
 Route::post('PostComptable/Create', [PostComptablecontroller::class, 'create'])->name('PostComptable.create');
@@ -68,3 +138,26 @@ Route::post('modele-transformation/update/{id}', [ModeleTransformationController
 Route::get('modele-transformation/delete/{id}', [ModeleTransformationController::class, 'delete'])->name('modele-transformation.delete');
 Route::get('modele-transformation/destroy/{id}', [ModeleTransformationController::class, 'destroy'])->name('modele-transformation.destroy');
 
+=======
+Route::get('postcomptable/all', [PostComptableController::class, 'all'])->name('postcomptable.All');
+Route::get('postcomptable/formAjout', [PostComptableController::class, 'formAjout'])->name('postcomptable.formAjout');
+Route::post('postcomptable/Create', [PostComptableController::class, 'create'])->name('postcomptable.create');
+Route::get('postcomptable/read/{id}', [PostComptableController::class, 'read'])->name('postcomptable.read');
+Route::get('postcomptable/formModifier/{id}', [PostComptableController::class, 'formModifier'])->name('postcomptable.formModifier');
+Route::post('postcomptable/update/{id}', [PostComptableController::class, 'update'])->name('postcomptable.update');
+Route::get('postcomptable/delete/{id}', [PostComptableController::class, 'delete'])->name('postcomptable.delete');
+Route::get('postcomptable/destroy/{id}', [PostComptableController::class, 'destroy'])->name('postcomptable.destroy');
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+>>>>>>> origin/dev

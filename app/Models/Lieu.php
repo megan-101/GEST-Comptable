@@ -13,5 +13,9 @@ class Lieu extends Model
     // les champs à remplir
     protected $fillable = ['code', 'libelle', 'adresse'];
 
+<<<<<<< HEAD
     protected $table = 'lieux';
+=======
+    protected $table = 'lieux'; 
+>>>>>>> origin/dev
 }

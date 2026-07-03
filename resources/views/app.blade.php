@@ -29,16 +29,30 @@
             <a class="nav-link" href="#"></a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link disabled" aria-disabled="true"></a>
+=======
+            <a class="nav-link" href="{{ route('utilisateur.index') }}">Liste Utilisateurs</a>
+>>>>>>> origin/dev
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('parametre.All') }}">Liste Paramètres</a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="{{ route('PostComptable.All') }}">Liste PostComptable</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('modele-transformation.All') }}">Modèles de Transformation</a>
+=======
+            <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste Post comptable</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('lignecomptable.index') }}">Lignes comptables</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('ecriture.index') }}">Écritures Comptables</a>
+>>>>>>> origin/dev
           </li>
         </ul>
       </div>

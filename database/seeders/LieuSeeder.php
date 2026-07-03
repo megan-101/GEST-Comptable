@@ -12,5 +12,9 @@ class LieuSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
+=======
+        \App\Models\Lieu::factory(10)->create();
+>>>>>>> origin/dev
     }
 }

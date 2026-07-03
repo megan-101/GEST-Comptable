@@ -52,6 +52,21 @@ return [
 
     'channels' => [
 
+        // 'ajout_Utilisateur' => [
+        //     'driver' => 'single',
+        //     'path' => storage_path('logs/ajout_Utilisateur.log'),
+        //     'level' => 'debug',
+        // ],
+
+        //Création des chaines pour les
+
+        'ajout_manufacturer' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/ajout_lieu.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),

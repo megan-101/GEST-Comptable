@@ -14,7 +14,11 @@ class PostComptableSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
             PostComptable::factory(10)->create();
 
+=======
+        PostComptable::factory(10)->create();
+>>>>>>> origin/dev
     }
 }

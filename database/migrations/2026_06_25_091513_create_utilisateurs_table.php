@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('login')->unique();
             $table->string('nom');
             $table->string('mdp');
+<<<<<<< HEAD
+=======
+            $table->string('email')->unique();
+            $table->boolean('is_active')->default(true);
+            $table->rememberToken();
+>>>>>>> origin/dev
             $table->timestamps();
         });
     }

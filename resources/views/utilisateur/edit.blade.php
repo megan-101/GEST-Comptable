@@ -37,6 +37,13 @@
                         <label for="mdp" class="form-label">Mot de passe</label>
                         <input type="password" value="{{ $utilisateur->mdp }}" name="mdp" class="form-control" id="mdp" readonly>
                     </div>
+<<<<<<< HEAD
+=======
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" value="{{ $utilisateur->email }}" name="email" class="form-control" id="email" required>
+                    </div>
+>>>>>>> origin/dev
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary px-4">Modifier</button>
                         <a href="{{ route('utilisateur.index') }}" class="btn btn-outline-danger">Annuler</a>
