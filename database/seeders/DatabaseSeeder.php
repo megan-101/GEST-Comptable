@@ -11,5 +11,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Lieu::factory(10)->create();
+        $this->call([
+            LigneComptableSeeder::class,
+        ]);
     }
 }
