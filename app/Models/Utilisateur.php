@@ -23,11 +23,6 @@ class Utilisateur extends Authenticatable
         "remember_token",       
     ];
 
-    public function getAuthIdentifier()
-    {
-        return $this->login;
-    }
-
     public function getAuthPassword()
     {
         return $this->mdp;
