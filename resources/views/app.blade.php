@@ -38,7 +38,7 @@
           <a class="nav-link" href="{{ route('postcomptable.All') }}">Liste Post comptable</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="{{ route('traces.All') }}">Liste des Traces</a>
+          <a class="nav-link" href="{{ route('logs.All') }}">Liste des Logs</a>
         </li>
         </ul>
       </div>

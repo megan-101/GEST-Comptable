@@ -10,11 +10,7 @@ class Log extends Model
     use HasFactory;
 
     protected $fillable = [
-        'modele',
         'action',
         'message',
-        'statut',
-        'ip_address',
-        'date'
     ];
 }
