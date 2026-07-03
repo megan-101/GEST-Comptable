@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
+=======
+use App\Interfaces\LogInterface;
+>>>>>>> fabrice
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +20,12 @@ use Illuminate\View\View;
 
 class NewPasswordController extends Controller
 {
+
+    private LogInterface $logInterface;
+    public function __construct(LogInterface $logInterface)
+    {
+       $this->logInterface = $logInterface;
+    }
     /**
      * Display the password reset view.
      */
@@ -42,6 +52,7 @@ class NewPasswordController extends Controller
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
+<<<<<<< HEAD
             function (User $user) use ($request) {
                 $user->forceFill([
                     'password' => Hash::make($request->password),
@@ -49,6 +60,21 @@ class NewPasswordController extends Controller
                 ])->save();
 
                 event(new PasswordReset($user));
+=======
+            function ($user) use ($request) {
+                $user->forceFill([
+                    'mdp' => Hash::make($request->password),
+                    'remember_token' => Str::random(60),
+                ])->save();
+
+                $this->logInterface->save([
+                    'modele' => 'UTILISATEUR',
+                    'action' => 'Réinitialisation du mot de passe',
+                    'statut' => 'SUCCES',
+                    'message' => 'Réinitialisation du mot de passe avec succes',
+                    'ip_address' => request()->ip(),
+                ]);
+>>>>>>> fabrice
             }
         );
 
