@@ -11,4 +11,5 @@ return [
     App\Providers\UtilisateurProvider::class,
     App\Providers\EcritureComptableProvider::class,
     App\Providers\OperationComptableProvider::class,
+    App\Providers\TransformationServiceProvider::class,
 ];

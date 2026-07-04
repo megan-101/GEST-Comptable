@@ -21,15 +21,16 @@ class ModeleTransformation extends Model
     ];
 
     protected $casts = [
-        'flag_piece' => 'boolean',
+        'flag_piece'  => 'boolean',
         'flag_compte' => 'boolean',
     ];
 
     /**
-     * Relation avec les opérations.
+     * Relation avec les opérations comptables.
      */
     public function operations()
     {
-        return $this->hasMany(Operation::class, 'modele_id');
+        return $this->hasMany(OperationComptable::class, 'modele_id');
     }
 }
+
